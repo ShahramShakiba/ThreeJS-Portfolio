@@ -4,7 +4,7 @@ import Loop from './Utils/Loop.js';
 import Renderer from './Renderer.js';
 import World from './World/World.js';
 import Resize from './Utils/Resize.js';
-import Preloader from './UI/Preloader.js';
+import Preloader from '/App/UI/Preloader.js';
 import AssetLoader from './Utils/AssetLoader.js';
 
 // to avoid maximum call stack size error
