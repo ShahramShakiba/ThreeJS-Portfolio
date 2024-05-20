@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import App from './App';
 import { sizesStore } from './Utils/Store';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export default class Camera {
   constructor() {

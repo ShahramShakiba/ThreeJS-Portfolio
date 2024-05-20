@@ -10,9 +10,9 @@ export default class Loop {
   }
 
   loop() {
-    this.world.loop();
     this.camera.loop();
     this.renderer.loop();
+    this.world.loop();
     window.requestAnimationFrame(() => this.loop());
   }
 }

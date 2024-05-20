@@ -11,14 +11,13 @@ export default class World {
   }
 
   setCube() {
-    this.cubMesh = new THREE.Mesh(
+    this.cubeMesh = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1),
       new THREE.MeshBasicMaterial({ color: 'yellow' })
     );
-
-    this.scene.add(this.cubMesh);
+    this.scene.add(this.cubeMesh);
   }
   loop() {
-    this.cubMesh.rotation.y += 0.01;
+    this.cubeMesh.rotation.y += 0.01;
   }
 }
