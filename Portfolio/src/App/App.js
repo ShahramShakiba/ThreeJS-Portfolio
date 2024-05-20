@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import Camera from './Camera.js';
 import Loop from './Utils/Loop.js';
 import Renderer from './Renderer.js';
+import World from './World/World.js';
 
 // to avoid maximum call stack size error
 let instance = null;
@@ -15,6 +16,8 @@ export default class App {
     this.scene = new THREE.Scene();
     this.camera = new Camera();
     this.renderer = new Renderer();
+    this.world = new World();
+    
     this.loop = new Loop();
   }
 }

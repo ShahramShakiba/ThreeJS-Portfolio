@@ -19,7 +19,6 @@ export default class Renderer {
     this.instance.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   }
   loop() {
-    console.log('camera and scene updating');
     this.instance.render(this.scene, this.camera.instance);
   }
 }
