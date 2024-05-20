@@ -13,21 +13,21 @@ export default class App {
   constructor() {
     if (instance) return instance;
     instance = this;
-    //_______ Threejs Elements
+    //^^^^^^ Threejs Elements
     this.canvas = document.querySelector('canvas.threejs');
     this.scene = new THREE.Scene();
 
-    //_______ Asset Loader
+    //^^^^^^ Asset Loader
     this.assetLoader = new AssetLoader();
 
-    //_______ Camera & Renderer
+    //^^^^^^ Camera & Renderer
     this.camera = new Camera();
     this.renderer = new Renderer();
 
-    //_______ World
+    //^^^^^^ World
     this.world = new World();
 
-    //_______ Extra Utils
+    //^^^^^^ Extra Utils
     this.loop = new Loop();
     this.resize = new Resize();
   }
