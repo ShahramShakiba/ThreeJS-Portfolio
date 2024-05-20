@@ -4,6 +4,7 @@ import Loop from './Utils/Loop.js';
 import Renderer from './Renderer.js';
 import World from './World/World.js';
 import Resize from './Utils/Resize.js';
+import AssetLoader from './Utils/AssetLoader.js';
 
 // to avoid maximum call stack size error
 let instance = null;
@@ -15,6 +16,9 @@ export default class App {
     //_______ Threejs Elements
     this.canvas = document.querySelector('canvas.threejs');
     this.scene = new THREE.Scene();
+
+    //_______ Asset Loader
+    this.assetLoader = new AssetLoader();
 
     //_______ Camera & Renderer
     this.camera = new Camera();
