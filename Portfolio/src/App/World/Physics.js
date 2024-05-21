@@ -44,19 +44,34 @@ export default class Physics {
     this.rigidBody.setRotation(mesh.quaternion);
 
     //autoCompute collider dimensions
+    const dimensions = this.computeCuboidDimensions(mesh);
 
-    const colliderType = this.rapier.ColliderDesc.cuboid(0.5, 0.5, 0.5);
+    const colliderType = this.rapier.ColliderDesc.cuboid(
+      dimensions.x / 2,
+      dimensions.y / 2,
+      dimensions.z / 2
+    );
     this.world.createCollider(colliderType, this.rigidBody);
 
     this.meshMap.set(mesh, this.rigidBody);
   }
 
+  computeCuboidDimensions(mesh) {
+    mesh.geometry.computeBoundingBox();
+    const size = mesh.geometry.boundingBox.getSize(new THREE.Vector3());
+    const worldScale = mesh.getWorldScale(new THREE.Vector3());
+    size.multiply(worldScale);
+
+    return size;
+  }
+
+  // Update Threejs position depending on physic-calculation of rigidBody
   loop() {
     if (!this.rapierLoaded) return;
 
     //===== 04. Update Mesh from physics-simulation
     this.world.step();
-    
+
     this.meshMap.forEach((rigidBody, mesh) => {
       const position = rigidBody.translation();
       const rotation = rigidBody.rotation();

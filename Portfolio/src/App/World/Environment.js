@@ -23,12 +23,13 @@ export default class Environment {
   }
   addMeshes() {
     //=========== 02.Create Mesh
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.BoxGeometry(5, 4, 6);
     const material = new THREE.MeshStandardMaterial({ color: 'yellow' });
     this.cubeMesh = new THREE.Mesh(geometry, material);
     this.cubeMesh.position.y = 12;
     this.cubeMesh.rotation.x = 15;
     this.cubeMesh.rotation.z = 20;
+    // this.cubeMesh.scale.set(3, 3, 3);
 
     this.scene.add(this.cubeMesh);
     this.physics.add(this.cubeMesh);
