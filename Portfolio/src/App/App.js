@@ -20,7 +20,7 @@ export default class App {
 
     //^^^^^^ Asset Loader
     this.assetLoader = new AssetLoader();
-    this.preloader = new Preloader();
+    // this.preloader = new Preloader();
 
     //^^^^^^ Camera & Renderer
     this.camera = new Camera();

@@ -14,7 +14,6 @@ export default class Preloader {
       this.numberOfAssetsToLoad = state.assetsToLoad.length;
       this.progress = this.numberOfLoadedAssets / this.numberOfAssetsToLoad;
       this.progress = Math.trunc(this.progress * 100); //to omit decimals number
-      console.log(this.progress);
 
       //===== Update progressPercentage in real-time
       document.getElementById('progressPercentage').innerHTML = this.progress;

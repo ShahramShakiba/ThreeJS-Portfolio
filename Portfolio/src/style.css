@@ -14,7 +14,7 @@ body {
   top: 0px;
   left: 0px;
   pointer-events: none;
-  transition: opacity 1s;
+  transition: opacity 3s;
 }
 
 .overlay.fade {
