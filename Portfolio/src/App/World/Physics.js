@@ -15,7 +15,7 @@ export default class Physics {
       this.rapier = RAPIER;
 
       //========== 02.Create Mesh
-      const groundGeometry = new THREE.BoxGeometry(10, 1, 10);
+      const groundGeometry = new THREE.BoxGeometry(20, 1, 20);
       const groundMaterial = new THREE.MeshStandardMaterial({
         color: 'turquoise',
       });
@@ -26,7 +26,7 @@ export default class Physics {
       const groundRigidBodyType = RAPIER.RigidBodyDesc.fixed();
       this.groundRigidBody = this.world.createRigidBody(groundRigidBodyType);
 
-      const groundColliderType = RAPIER.ColliderDesc.cuboid(5, 0.5, 5);
+      const groundColliderType = RAPIER.ColliderDesc.cuboid(10, 0.5, 10);
       this.world.createCollider(groundColliderType, this.groundRigidBody);
 
       //run the loop-method only when rapier has been loaded
@@ -36,12 +36,14 @@ export default class Physics {
   }
 
   add(mesh) {
-    //============ 03.Create the Rigid Body
     const rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
+    const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
+    const worldRotation = mesh.getWorldQuaternion(new THREE.Quaternion());
+
     //make the physic-engine respect the position or rotation of Mesh
-    this.rigidBody.setTranslation(mesh.position);
-    this.rigidBody.setRotation(mesh.quaternion);
+    this.rigidBody.setTranslation(worldPosition);
+    this.rigidBody.setRotation(worldRotation);
 
     //autoCompute collider dimensions
     const dimensions = this.computeCuboidDimensions(mesh);
@@ -65,7 +67,7 @@ export default class Physics {
     return size;
   }
 
-  // Update Threejs position depending on physic-calculation of rigidBody
+  //Update Threejs position depending on physic-calculation of rigidBody
   loop() {
     if (!this.rapierLoaded) return;
 
@@ -73,8 +75,21 @@ export default class Physics {
     this.world.step();
 
     this.meshMap.forEach((rigidBody, mesh) => {
-      const position = rigidBody.translation();
-      const rotation = rigidBody.rotation();
+      const position = new THREE.Vector3().copy(rigidBody.translation());
+      const rotation = new THREE.Quaternion().copy(rigidBody.rotation());
+
+      position.applyMatrix4(
+        new THREE.Matrix4().copy(mesh.parent.matrixWorld).invert()
+      );
+
+      const inverseParentMatrix = new THREE.Matrix4()
+        .extractRotation(mesh.parent.matrixWorld)
+        .invert();
+
+      const inverseParentRotation =
+        new THREE.Quaternion().setFromRotationMatrix(inverseParentMatrix);
+      rotation.premultiply(inverseParentRotation);
+
       mesh.position.copy(position);
       mesh.quaternion.copy(rotation);
     });
