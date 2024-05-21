@@ -1,25 +1,20 @@
 import * as THREE from 'three';
 import App from '../App.js';
+import { appStateStore } from '../Utils/Store.js';
 
 export default class Physics {
   constructor() {
     this.app = new App();
     this.scene = this.app.scene;
+    this.meshMap = new Map();
 
     import('@dimforge/rapier3d').then((RAPIER) => {
-      //===== 01. Setup the Physics World
+      //========== 01.Setup the Physics World
       const gravity = { x: 0, y: -9.81, z: 0 };
       this.world = new RAPIER.World(gravity);
+      this.rapier = RAPIER;
 
-      //===== 02. Create Mesh
-      const geometry = new THREE.BoxGeometry(1, 1, 1);
-      const material = new THREE.MeshStandardMaterial({ color: 'yellow' });
-      this.cubeMesh = new THREE.Mesh(geometry, material);
-      this.cubeMesh.position.y = 12;
-      this.cubeMesh.rotation.x = 15;
-      this.cubeMesh.rotation.z = 20;
-      this.scene.add(this.cubeMesh);
-
+      //========== 02.Create Mesh
       const groundGeometry = new THREE.BoxGeometry(10, 1, 10);
       const groundMaterial = new THREE.MeshStandardMaterial({
         color: 'turquoise',
@@ -27,18 +22,7 @@ export default class Physics {
       this.groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
       this.scene.add(this.groundMesh);
 
-      //===== 03. Create the Rigid Body(represent the Mesh in physical-world)
-      //cube rigidBody
-      const rigidBodyType = RAPIER.RigidBodyDesc.dynamic();
-      this.rigidBody = this.world.createRigidBody(rigidBodyType);
-      //make the physic-engine respect the position or rotation of cubeMesh
-      this.rigidBody.setTranslation(this.cubeMesh.position);
-      this.rigidBody.setRotation(this.cubeMesh.quaternion);
-
-      const colliderType = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-      this.world.createCollider(colliderType, this.rigidBody);
-
-      //ground rigidBody
+      //====== 03.Create the Rigid Body(represent the Mesh in physical-world)
       const groundRigidBodyType = RAPIER.RigidBodyDesc.fixed();
       this.groundRigidBody = this.world.createRigidBody(groundRigidBodyType);
 
@@ -47,7 +31,24 @@ export default class Physics {
 
       //run the loop-method only when rapier has been loaded
       this.rapierLoaded = true;
+      appStateStore.setState({ physicsReady: true });
     });
+  }
+
+  add(mesh) {
+    //============ 03.Create the Rigid Body
+    const rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
+    this.rigidBody = this.world.createRigidBody(rigidBodyType);
+    //make the physic-engine respect the position or rotation of Mesh
+    this.rigidBody.setTranslation(mesh.position);
+    this.rigidBody.setRotation(mesh.quaternion);
+
+    //autoCompute collider dimensions
+
+    const colliderType = this.rapier.ColliderDesc.cuboid(0.5, 0.5, 0.5);
+    this.world.createCollider(colliderType, this.rigidBody);
+
+    this.meshMap.set(mesh, this.rigidBody);
   }
 
   loop() {
@@ -55,9 +56,12 @@ export default class Physics {
 
     //===== 04. Update Mesh from physics-simulation
     this.world.step();
-    const position = this.rigidBody.translation();
-    const rotation = this.rigidBody.rotation();
-    this.cubeMesh.position.copy(position);
-    this.cubeMesh.quaternion.copy(rotation);
+    
+    this.meshMap.forEach((rigidBody, mesh) => {
+      const position = rigidBody.translation();
+      const rotation = rigidBody.rotation();
+      mesh.position.copy(position);
+      mesh.quaternion.copy(rotation);
+    });
   }
 }
