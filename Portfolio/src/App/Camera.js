@@ -22,7 +22,7 @@ export default class Camera {
       0.1,
       200
     );
-    this.instance.position.z = 100;
+    this.instance.position.z = 40;
   }
   setControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
