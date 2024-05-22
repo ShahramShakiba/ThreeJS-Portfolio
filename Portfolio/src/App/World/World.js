@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import App from '../App';
 import Physics from './Physics.js';
+import Character from './Character.js';
 import Environment from './Environment.js';
 import { appStateStore } from '../Utils/Store.js';
 
@@ -14,6 +15,7 @@ export default class World {
     appStateStore.subscribe((state) => {
       if (state.physicsReady) {
         this.environment = new Environment();
+        this.character = new Character();
       }
     });
 
