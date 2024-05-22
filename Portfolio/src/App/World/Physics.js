@@ -9,12 +9,12 @@ export default class Physics {
     this.meshMap = new Map();
 
     import('@dimforge/rapier3d').then((RAPIER) => {
-      //========== 01.Setup the Physics World
+      // Setup the Physics World
       const gravity = { x: 0, y: -9.81, z: 0 };
       this.world = new RAPIER.World(gravity);
       this.rapier = RAPIER;
 
-      //========== 02.Create Mesh
+      // Create Mesh
       const groundGeometry = new THREE.BoxGeometry(20, 1, 20);
       const groundMaterial = new THREE.MeshStandardMaterial({
         color: 'turquoise',
@@ -35,6 +35,7 @@ export default class Physics {
     });
   }
 
+  // Adding a Mesh to the Physics-Simulation.
   add(mesh) {
     const rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
@@ -67,29 +68,35 @@ export default class Physics {
     return size;
   }
 
-  //Update Threejs position depending on physic-calculation of rigidBody
+  // Update the scene based on the physics-simulation.
   loop() {
     if (!this.rapierLoaded) return;
 
-    //===== 04. Update Mesh from physics-simulation
+    // Advances the physics simulation by one-step
     this.world.step();
 
     this.meshMap.forEach((rigidBody, mesh) => {
+      // Store... & avoid modifying the original data
       const position = new THREE.Vector3().copy(rigidBody.translation());
       const rotation = new THREE.Quaternion().copy(rigidBody.rotation());
 
+      // adjusts the position based on the parent-matrix
       position.applyMatrix4(
         new THREE.Matrix4().copy(mesh.parent.matrixWorld).invert()
       );
 
+      // Extract the rotational component of the parent's matrix and invert it
       const inverseParentMatrix = new THREE.Matrix4()
         .extractRotation(mesh.parent.matrixWorld)
         .invert();
 
+      // Create a quaternion from the inverted rotational matrix
       const inverseParentRotation =
         new THREE.Quaternion().setFromRotationMatrix(inverseParentMatrix);
+      // Apply the inverse rotation to the rigid-body's-rotation
       rotation.premultiply(inverseParentRotation);
 
+      // Update the mesh's position and rotation
       mesh.position.copy(position);
       mesh.quaternion.copy(rotation);
     });
