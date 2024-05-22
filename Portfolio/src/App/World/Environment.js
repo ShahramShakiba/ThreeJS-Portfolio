@@ -29,22 +29,24 @@ export default class Environment {
     this.scene.add(group);
 
     // Create Box
-    const geometry = new THREE.SphereGeometry(3, 32, 32);
+    const geometry = new THREE.TorusKnotGeometry(1, 0.3, 30, 8);
     const material = new THREE.MeshStandardMaterial({ color: 'yellow' });
     this.cubeMesh = new THREE.Mesh(geometry, material);
     this.cubeMesh.position.y = 10;
     this.cubeMesh.rotation.x = 0.5;
     this.cubeMesh.rotation.z = 0.5;
+    this.cubeMesh.scale.set(1, 2, 3);
+
     group.add(this.cubeMesh);
-    this.physics.add(this.cubeMesh, 'dynamic', 'ball');
+    this.physics.add(this.cubeMesh, 'dynamic', 'trimesh');
 
     this.cubeMesh2 = new THREE.Mesh(geometry, material);
     this.cubeMesh2.position.y = 10;
-    this.cubeMesh2.position.x = 0;
+    this.cubeMesh2.position.x = 4;
     this.cubeMesh2.rotation.x = 0.5;
     this.cubeMesh2.rotation.z = 0.5;
     group.add(this.cubeMesh2);
-    this.physics.add(this.cubeMesh2, 'dynamic', 'ball');
+    this.physics.add(this.cubeMesh2, 'dynamic', 'trimesh');
 
     // Create Ground
     const groundGeometry = new THREE.BoxGeometry(20, 1, 20);

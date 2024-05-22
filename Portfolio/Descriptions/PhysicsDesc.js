@@ -236,4 +236,21 @@ Representation of Rotation:
 
 ? .setFromRotationMatrix()
 -  converts a rotation matrix into a quaternion. This is important because transformations in the scene graph are often represented as matrices, but for certain operations (like applying rotations), quaternions are more convenient.
+
+
+
+
+
+
+
+
+
+
+
+* computeTrimeshDimensions
+- getComponent :
+If index equals 0 returns the x value.
+If index equals 1 returns the y value.
+If index equals 2 returns the z value.
+
 */

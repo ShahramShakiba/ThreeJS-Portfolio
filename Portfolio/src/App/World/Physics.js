@@ -31,6 +31,7 @@ export default class Physics {
     }
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
 
+    //=====defining the "collider" type
     let colliderType;
     switch (collider) {
       case 'cuboid':
@@ -50,11 +51,11 @@ export default class Physics {
         break;
 
       case 'trimesh':
-        console.log('Trimesh');
+        const { scaleVertices, indices } = this.computeTrimeshDimensions(mesh);
+        colliderType = this.rapier.ColliderDesc.trimesh(scaleVertices, indices);
+        this.world.createCollider(colliderType, this.rigidBody);
         break;
     }
-
-    //=====defining the "collider" type
 
     //=====setting the rigid-body position & rotation
     const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
@@ -74,13 +75,21 @@ export default class Physics {
     size.multiply(worldScale);
     return size;
   }
-
   computeBallDimensions(mesh) {
     mesh.geometry.computeBoundingSphere();
     const radius = mesh.geometry.boundingSphere.radius;
     const worldScale = mesh.getWorldScale(new THREE.Vector3());
     const maxScale = Math.max(worldScale.x, worldScale.y, worldScale.z);
     return radius * maxScale;
+  }
+  computeTrimeshDimensions(mesh) {
+    const vertices = mesh.geometry.attributes.position.array;
+    const indices = mesh.geometry.index.array;
+    const worldScale = mesh.getWorldScale(new THREE.Vector3());
+    const scaleVertices = vertices.map((vertex, index) => {
+      return vertex * worldScale.getComponent(index % 3);
+    });
+    return { scaleVertices, indices };
   }
 
   // Update the scene based on the physics-simulation.
