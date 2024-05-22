@@ -21,12 +21,14 @@ export default class Environment {
 
     this.scene.add(this.directionalLight);
   }
+
   addMeshes() {
     const group = new THREE.Group();
     group.position.y = 10;
     group.rotation.x = 0.5;
     this.scene.add(group);
 
+    // Create Box
     const geometry = new THREE.BoxGeometry(4, 2, 1);
     const material = new THREE.MeshStandardMaterial({ color: 'yellow' });
     this.cubeMesh = new THREE.Mesh(geometry, material);
@@ -36,6 +38,17 @@ export default class Environment {
     this.cubeMesh.scale.set(1, 1, 1);
 
     group.add(this.cubeMesh);
-    this.physics.add(this.cubeMesh);
+    this.physics.add(this.cubeMesh, 'dynamic');
+
+    // Create Ground
+    const groundGeometry = new THREE.BoxGeometry(20, 1, 20);
+    const groundMaterial = new THREE.MeshStandardMaterial({
+      color: 'turquoise',
+    });
+    this.groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+
+    this.scene.add(this.groundMesh);
+    this.physics.add(this.groundMesh, 'fixed');
+
   }
 }

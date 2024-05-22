@@ -14,22 +14,6 @@ export default class Physics {
       this.world = new RAPIER.World(gravity);
       this.rapier = RAPIER;
 
-      // Create Mesh
-      const groundGeometry = new THREE.BoxGeometry(20, 1, 20);
-      const groundMaterial = new THREE.MeshStandardMaterial({
-        color: 'turquoise',
-      });
-      this.groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-      this.scene.add(this.groundMesh);
-
-      // Create the "Rigid-Body"(represent the Mesh in physical-world)
-      const groundRigidBodyType = RAPIER.RigidBodyDesc.fixed();
-      this.groundRigidBody = this.world.createRigidBody(groundRigidBodyType);
-
-      // Create Collider with "half" of each dimensions of the real-geometry
-      const groundColliderType = RAPIER.ColliderDesc.cuboid(10, 0.5, 10);
-      this.world.createCollider(groundColliderType, this.groundRigidBody);
-
       //run the loop-method only when physics-engine has been loaded
       this.rapierLoaded = true;
       appStateStore.setState({ physicsReady: true });
@@ -37,8 +21,13 @@ export default class Physics {
   }
 
   // Adding a Mesh to the Physics-Simulation.
-  add(mesh) {
-    const rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
+  add(mesh, type) {
+    let rigidBodyType;
+    if (type === 'dynamic') {
+      rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
+    } else if (type === 'fixed') {
+      rigidBodyType = this.rapier.RigidBodyDesc.fixed();
+    }
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
 
     const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
@@ -50,7 +39,6 @@ export default class Physics {
 
     //autoCompute collider dimensions
     const dimensions = this.computeCuboidDimensions(mesh);
-
     const colliderType = this.rapier.ColliderDesc.cuboid(
       dimensions.x / 2,
       dimensions.y / 2,
@@ -75,7 +63,7 @@ export default class Physics {
   loop() {
     if (!this.rapierLoaded) return;
 
-    // Advances the physics simulation by one-step
+    // Advances the physics-simulation by one-step
     this.world.step();
 
     this.meshMap.forEach((rigidBody, mesh) => {
@@ -92,7 +80,7 @@ export default class Physics {
       const inverseParentMatrix = new THREE.Matrix4()
         .extractRotation(mesh.parent.matrixWorld)
         .invert();
-
+        
       // Create a quaternion from the inverted rotational matrix
       const inverseParentRotation =
         new THREE.Quaternion().setFromRotationMatrix(inverseParentMatrix);

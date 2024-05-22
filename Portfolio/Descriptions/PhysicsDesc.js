@@ -45,7 +45,7 @@
 
 ? collider
 - Colliders represent the geometric shapes that generate contacts and collision events when they touch.
-- is a component attached to a rigid body that defines its shape and volume for collision detection.
+- is a component attached to a rigid-body that defines its shape and volume for collision detection.
 
 ? Note that rigid-bodies are only responsible for the dynamics and kinematics of the solid. Colliders can be attached to a rigid-body to specify its shape and enable collision-detection. A rigid-body without collider attached to it will not be affected by contacts (because there is no shape to compute contact against).
 
@@ -194,7 +194,7 @@
 
 
 
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ? position.applyMatrix4()
 - This effectively transforms the world position of the rigid body back into the local coordinate system of the parent object.
 
@@ -236,14 +236,4 @@ Representation of Rotation:
 
 ? .setFromRotationMatrix()
 -  converts a rotation matrix into a quaternion. This is important because transformations in the scene graph are often represented as matrices, but for certain operations (like applying rotations), quaternions are more convenient.
-
-
-
-
-
-
-
-
-
-
 */
