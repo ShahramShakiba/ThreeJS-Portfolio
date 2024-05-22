@@ -4,6 +4,7 @@ export default class InputController {
   constructor() {
     this.startListening();
     this.inputStore = inputStore;
+    this.keyPressed = {};
   }
 
   startListening() {
@@ -12,41 +13,58 @@ export default class InputController {
   }
 
   onKeyDown(event) {
+    if (this.keyPressed[event.code]) return;
+
     switch (event.code) {
       case 'KeyW':
-        this.inputStore.setState({ forward: true });
+      case 'ArrowUp':
+        console.log('forward');
+        inputStore.setState({ forward: true });
         break;
 
       case 'KeyA':
-        this.inputStore.setState({ left: true });
+      case 'ArrowLeft':
+        console.log('left');
+        inputStore.setState({ left: true });
         break;
 
       case 'KeyS':
-        this.inputStore.setState({ backward: true });
+      case 'ArrowDown':
+        console.log('backward');
+        inputStore.setState({ backward: true });
         break;
 
       case 'KeyD':
-        this.inputStore.setState({ right: true });
+      case 'ArrowRight':
+        console.log('right');
+        inputStore.setState({ right: true });
         break;
     }
+    this.keyPressed[event.code] = true;
   }
+
   onKeyUp(event) {
     switch (event.code) {
       case 'KeyW':
-        this.inputStore.setState({ forward: false });
+      case 'ArrowUp':
+        inputStore.setState({ forward: false });
         break;
 
       case 'KeyA':
-        this.inputStore.setState({ left: false });
+      case 'ArrowLeft':
+        inputStore.setState({ left: false });
         break;
 
       case 'KeyS':
-        this.inputStore.setState({ backward: false });
+      case 'ArrowDown':
+        inputStore.setState({ backward: false });
         break;
 
       case 'KeyD':
-        this.inputStore.setState({ right: false });
+      case 'ArrowRight':
+        inputStore.setState({ right: false });
         break;
     }
+    this.keyPressed[event.code] = false;
   }
 }

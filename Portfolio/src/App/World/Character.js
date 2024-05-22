@@ -18,11 +18,24 @@ export default class Character {
 
   instantiateCharacter() {
     const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+    const material = new THREE.MeshStandardMaterial({ color: 'red' });
     this.character = new THREE.Mesh(geometry, material);
     this.character.position.set(0, 2.5, 0);
     this.scene.add(this.character);
   }
 
-  loop() {}
+  loop() {
+    if (this.forward) {
+      this.character.position.z -= 0.1;
+    }
+    if (this.backward) {
+      this.character.position.z += 0.1;
+    }
+    if (this.left) {
+      this.character.position.x -= 0.1;
+    }
+    if (this.right) {
+      this.character.position.x += 0.1;
+    }
+  }
 }
