@@ -21,7 +21,8 @@ export default class Physics {
   }
 
   // Adding a Mesh to the Physics-Simulation.
-  add(mesh, type) {
+  add(mesh, type, collider) {
+    //=====defining the "rigid-body" type
     let rigidBodyType;
     if (type === 'dynamic') {
       rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
@@ -30,21 +31,37 @@ export default class Physics {
     }
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
 
+    let colliderType;
+    switch (collider) {
+      case 'cuboid':
+        const dimensions = this.computeCuboidDimensions(mesh);
+        colliderType = this.rapier.ColliderDesc.cuboid(
+          dimensions.x / 2,
+          dimensions.y / 2,
+          dimensions.z / 2
+        );
+        this.world.createCollider(colliderType, this.rigidBody);
+        break;
+
+      case 'ball':
+        const radius = this.computeBallDimensions(mesh);
+        colliderType = this.rapier.ColliderDesc.ball(radius);
+        this.world.createCollider(colliderType, this.rigidBody);
+        break;
+
+      case 'trimesh':
+        console.log('Trimesh');
+        break;
+    }
+
+    //=====defining the "collider" type
+
+    //=====setting the rigid-body position & rotation
     const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
     const worldRotation = mesh.getWorldQuaternion(new THREE.Quaternion());
-
-    //match rigid-body's-position & rotation to the mesh's world position.
+    //match rigid-body's-position & rotation to the mesh's world position
     this.rigidBody.setTranslation(worldPosition);
     this.rigidBody.setRotation(worldRotation);
-
-    //autoCompute collider dimensions
-    const dimensions = this.computeCuboidDimensions(mesh);
-    const colliderType = this.rapier.ColliderDesc.cuboid(
-      dimensions.x / 2,
-      dimensions.y / 2,
-      dimensions.z / 2
-    );
-    this.world.createCollider(colliderType, this.rigidBody);
 
     this.meshMap.set(mesh, this.rigidBody);
   }
@@ -55,8 +72,15 @@ export default class Physics {
     const size = mesh.geometry.boundingBox.getSize(new THREE.Vector3());
     const worldScale = mesh.getWorldScale(new THREE.Vector3());
     size.multiply(worldScale);
-
     return size;
+  }
+
+  computeBallDimensions(mesh) {
+    mesh.geometry.computeBoundingSphere();
+    const radius = mesh.geometry.boundingSphere.radius;
+    const worldScale = mesh.getWorldScale(new THREE.Vector3());
+    const maxScale = Math.max(worldScale.x, worldScale.y, worldScale.z);
+    return radius * maxScale;
   }
 
   // Update the scene based on the physics-simulation.
@@ -80,7 +104,7 @@ export default class Physics {
       const inverseParentMatrix = new THREE.Matrix4()
         .extractRotation(mesh.parent.matrixWorld)
         .invert();
-        
+
       // Create a quaternion from the inverted rotational matrix
       const inverseParentRotation =
         new THREE.Quaternion().setFromRotationMatrix(inverseParentMatrix);
