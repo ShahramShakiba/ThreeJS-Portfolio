@@ -32,11 +32,22 @@
 * this.scene.add(this.groundMesh); 
 - Adds the ground mesh to the scene.
 
+--------------------------------------------
+? rigid body 
+- is an object in the physics simulation that retains its shape and size, resisting deformation.
+- Rigid bodies are used to represent physical entities in the simulated world, such as objects, characters, or obstacles.
+
 * const groundRigidBodyType = RAPIER.RigidBodyDesc.fixed(); 
 - Describes the rigid-body as fixed (not affected by forces).
 
 * this.groundRigidBody = this.world.createRigidBody(groundRigidBodyType); 
 - Creates the rigid body in the physics world.
+
+? collider
+- Colliders represent the geometric shapes that generate contacts and collision events when they touch.
+- is a component attached to a rigid body that defines its shape and volume for collision detection.
+
+? Note that rigid-bodies are only responsible for the dynamics and kinematics of the solid. Colliders can be attached to a rigid-body to specify its shape and enable collision-detection. A rigid-body without collider attached to it will not be affected by contacts (because there is no shape to compute contact against).
 
 * const groundColliderType = RAPIER.ColliderDesc.cuboid(10, 0.5, 10); 
 - Describes the collider-shape as a cuboid.
@@ -47,41 +58,50 @@
 * this.rapierLoaded = true;
 - Sets a flag indicating the physics engine is loaded.
 
+-The loop method, which updates the physics simulation and synchronizes the positions and rotations of the meshes, checks this flag before running. This ensures that the physics engine is only used once it's fully loaded.
+
+- If rapierLoaded is false, the loop method exits early, preventing errors or undefined behavior that could occur if the physics engine isn't ready.
+
 * appStateStore.setState({ physicsReady: true });
-- Updates the application-state to indicate that the physics setup is complete.
+- This updates a global state store to signal that the physics system is ready.
+
+- By setting this state, components or systems that listen to appStateStore can react to the change and proceed with operations that require the physics engine. 
+- For example, UI elements might enable options related to physics interactions, or other initialization routines might start running.
 
 
 
 !------------ Adding Meshes
 * const rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
 - Describes the rigid-body as dynamic (affected by forces).
-
 * this.rigidBody = this.world.createRigidBody(rigidBodyType);
 - Creates a dynamic rigid body.
 
 * const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
-- Gets the world position of the mesh.
-
 * const worldRotation = mesh.getWorldQuaternion(new THREE.Quaternion());
-- Gets the world rotation of the mesh.
+- Gets the world position and rotation of the mesh.
+
+? Why Use "getWorldPosition" and "getWorldQuaternion"
+- When adding a mesh to the physics simulation, we need to ensure that the physics engine's representation (rigid body) of the mesh accurately reflects the mesh's position and orientation in the 3D scene. 
+
+? new THREE.Vector3()
+-  is where the calculated position will be stored. This avoids creating a new object each time the method is called, which can be more efficient.
+
+
 
 * this.rigidBody.setTranslation(worldPosition);
-- Sets the rigid body's position to match the mesh's world position.
-
 * this.rigidBody.setRotation(worldRotation);
-- Sets the rigid body's rotation to match the mesh's world rotation.
+- Sets the rigid body's position and rotation to match the mesh's world position.
 
 * const dimensions = this.computeCuboidDimensions(mesh);
 - Computes the dimensions of the collider.
 
-* const colliderType = this.rapier.ColliderDesc.cuboid(dimensions.x / 2, dimensions.y / 2, dimensions.z / 2);
-- Creates a cuboid collider using the computed dimensions.
-
-* this.world.createCollider(colliderType, this.rigidBody);
-- Adds the collider to the physics world.
+? .computeCuboidDimensions()
+-  is used to calculate the dimensions of the collider that represents the mesh in the physics simulation
+-  automates this process by calculating the dimensions based on the mesh's geometry and its current scale in the world.
 
 * this.meshMap.set(mesh, this.rigidBody);
-- Maps the mesh to its corresponding rigid body.
+- establishes a relationship between each mesh in the scene and its corresponding rigid-body in the physics simulation.
+
 
 
 
@@ -92,14 +112,30 @@
 * mesh.geometry.computeBoundingBox();
 - Computes the bounding box for the mesh's geometry.
 
+? computeBoundingBox()
+- is a method provided by Three.js that calculates the bounding box of a mesh's geometry. A bounding box is the smallest box (aligned with the coordinate axes) that completely contains the mesh. 
+
+- The bounding box is used in physics engines for Knowing the boundaries of an object helps to determine when it intersects with another object.
+
+- The bounding box provides a basis for correctly scaling and transforming objects in the scene.
+
+
+
 * const size = mesh.geometry.boundingBox.getSize(new THREE.Vector3()); 
 - Gets the size of the bounding box.
 
+? boundingBox.getSize()
+- After computing the boundingBox, boundingBox.getSize  is used to retrieve its dimensions. 
+
+- This method fills a "THREE.Vector3" object with the width, height, and depth of the bounding box.  It gives the exact size of the bounding box, which is necessary for creating colliders that match the size of the mesh.
+
+
+
 * const worldScale = mesh.getWorldScale(new THREE.Vector3());
-- Gets the world scale of the mesh.
+- This step retrieves the scale of the mesh in world coordinates, which is important for accurate dimension calculations. 
 
 * size.multiply(worldScale);
-- Adjusts the bounding box size by the mesh's world scale.
+- Adjusts the boundingBox size by the mesh's world scale.
 
 
 
@@ -145,14 +181,6 @@
 * mesh.quaternion.copy(rotation);
 - updates the mesh’s position & rotation
 - Copies the calculated position and rotation to the mesh.
-
-
-!==================================================================
-!========================= Add() ==================================
-
-? this.meshMap.set(mesh, this.rigidBody);
-- establishes a relationship between each mesh in the scene and its corresponding rigid body in the physics simulation.
-
 
 
 !==================================================================

@@ -22,14 +22,15 @@ export default class Physics {
       this.groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
       this.scene.add(this.groundMesh);
 
-      //====== 03.Create the Rigid Body(represent the Mesh in physical-world)
+      // Create the "Rigid-Body"(represent the Mesh in physical-world)
       const groundRigidBodyType = RAPIER.RigidBodyDesc.fixed();
       this.groundRigidBody = this.world.createRigidBody(groundRigidBodyType);
 
+      // Create Collider with "half" of each dimensions of the real-geometry
       const groundColliderType = RAPIER.ColliderDesc.cuboid(10, 0.5, 10);
       this.world.createCollider(groundColliderType, this.groundRigidBody);
 
-      //run the loop-method only when rapier has been loaded
+      //run the loop-method only when physics-engine has been loaded
       this.rapierLoaded = true;
       appStateStore.setState({ physicsReady: true });
     });
@@ -39,10 +40,11 @@ export default class Physics {
   add(mesh) {
     const rigidBodyType = this.rapier.RigidBodyDesc.dynamic();
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
+
     const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
     const worldRotation = mesh.getWorldQuaternion(new THREE.Quaternion());
 
-    //make the physic-engine respect the position or rotation of Mesh
+    //match rigid-body's-position & rotation to the mesh's world position.
     this.rigidBody.setTranslation(worldPosition);
     this.rigidBody.setRotation(worldRotation);
 
@@ -59,6 +61,7 @@ export default class Physics {
     this.meshMap.set(mesh, this.rigidBody);
   }
 
+  // Compute the Dimensions of the mesh's bounding box.
   computeCuboidDimensions(mesh) {
     mesh.geometry.computeBoundingBox();
     const size = mesh.geometry.boundingBox.getSize(new THREE.Vector3());
