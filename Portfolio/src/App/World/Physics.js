@@ -65,6 +65,7 @@ export default class Physics {
     this.rigidBody.setRotation(worldRotation);
 
     this.meshMap.set(mesh, this.rigidBody);
+    return this.rigidBody;
   }
 
   // Compute the Dimensions of the mesh's bounding box.
