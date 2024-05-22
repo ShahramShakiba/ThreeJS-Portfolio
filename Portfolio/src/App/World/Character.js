@@ -1,9 +1,17 @@
 import * as THREE from 'three';
 import App from '../App.js';
+import { inputStore } from '../Utils/Store.js';
 export default class Character {
   constructor() {
     this.app = new App();
     this.scene = this.app.scene;
+
+    inputStore.subscribe((state) => {
+      this.forward = state.forward;
+      this.backward = state.backward;
+      this.left = state.left;
+      this.right = state.right;
+    });
 
     this.instantiateCharacter();
   }

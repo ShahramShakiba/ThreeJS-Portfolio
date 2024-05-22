@@ -9,7 +9,7 @@ export default class World {
   constructor() {
     this.app = new App();
     this.scene = this.app.scene;
-    
+
     //========= create World classes
     this.physics = new Physics();
     appStateStore.subscribe((state) => {
@@ -24,5 +24,6 @@ export default class World {
 
   loop(deltaTime, elapsedTime) {
     this.physics.loop();
+    if (this.character) this.character.loop();
   }
 }
