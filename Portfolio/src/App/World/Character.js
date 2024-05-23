@@ -50,14 +50,28 @@ export default class Character {
   }
 
   loop() {
+    const movement = new THREE.Vector3();
     if (this.forward) {
+      movement.z -= 1;
     }
     if (this.backward) {
+      movement.z += 1;
     }
     if (this.left) {
+      movement.x -= 1;
     }
     if (this.right) {
+      movement.x += 1;
     }
+
+    movement.normalize().multiplyScalar(0.3);
+
+    const newPosition = new THREE.Vector3()
+      .copy(this.rigidBody.translation())
+      .add(movement);
+    this.rigidBody.setNextKinematicTranslation(newPosition);
+
+    this.character.position.copy(this.rigidBody.translation());
   }
 }
 
