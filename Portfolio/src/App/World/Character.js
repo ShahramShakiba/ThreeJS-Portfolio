@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import App from '../App.js';
 import { inputStore } from '../Utils/Store.js';
+
 export default class Character {
   constructor() {
     this.app = new App();
@@ -18,39 +19,45 @@ export default class Character {
   }
 
   instantiateCharacter() {
-    // const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const geometry = new THREE.BoxGeometry(2, 2, 2);
     const material = new THREE.MeshStandardMaterial({
       color: 'red',
       wireframe: true,
     });
     this.character = new THREE.Mesh(geometry, material);
     this.character.position.set(0, 2.5, 0);
-
     this.scene.add(this.character);
-    this.characterRigidBody = this.physics.add(
-      this.character,
-      'kinematic',
-      'ball'
+
+    // create a rigid body
+    this.rigidBodyType =
+      this.physics.rapier.RigidBodyDesc.kinematicPositionBased();
+    this.rigidBody = this.physics.world.createRigidBody(this.rigidBodyType);
+
+    // create a collider
+    this.colliderType = this.physics.rapier.ColliderDesc.cuboid(1, 1, 1);
+    this.collider = this.physics.world.createCollider(
+      this.colliderType,
+      this.rigidBody
     );
+
+    // set rigid-body position to character position
+    const worldPosition = this.character.getWorldPosition(new THREE.Vector3());
+    const worldRotation = this.character.getWorldQuaternion(
+      new THREE.Quaternion()
+    );
+    this.rigidBody.setTranslation(worldPosition);
+    this.rigidBody.setRotation(worldRotation);
   }
 
   loop() {
-    let { x, y, z } = this.characterRigidBody.translation();
     if (this.forward) {
-      z -= 0.5;
     }
     if (this.backward) {
-      z += 0.5;
     }
     if (this.left) {
-      x -= 0.5;
     }
     if (this.right) {
-      x += 0.5;
     }
-
-    this.characterRigidBody.setNextKinematicTranslation({ x, y, z });
   }
 }
 
@@ -66,4 +73,22 @@ export default class Character {
     let x = 0;
     let y = 0;
     let z = 0;
+*/
+
+/* Use kinematicPositionBased
+let { x, y, z } = this.characterRigidBody.translation();
+    if (this.forward) {
+      z -= 0.5;
+    }
+    if (this.backward) {
+      z += 0.5;
+    }
+    if (this.left) {
+      x -= 0.5;
+    }
+    if (this.right) {
+      x += 0.5;
+    }
+
+this.characterRigidBody.setNextKinematicTranslation({ x, y, z });
 */
