@@ -50,9 +50,12 @@ export default class Character {
 
     this.characterController =
       this.physics.world.createCharacterController(0.01);
+    this.characterController.setApplyImpulsesToDynamicBodies(true);
+    this.characterController.enableAutostep(3, 0.1, false);
+    this.characterController.enableSnapToGround(1);
   }
 
-  loop() {
+  loop(deltaTime) {
     const movement = new THREE.Vector3();
     if (this.forward) {
       movement.z -= 1;
@@ -67,15 +70,16 @@ export default class Character {
       movement.x += 1;
     }
 
-    movement.normalize().multiplyScalar(0.3);
+    movement.normalize().multiplyScalar(deltaTime * 20);
+    movement.y = -1;
 
     this.characterController.computeColliderMovement(this.collider, movement);
 
     const newPosition = new THREE.Vector3()
       .copy(this.rigidBody.translation())
       .add(this.characterController.computedMovement());
-    this.rigidBody.setNextKinematicTranslation(newPosition);
 
+    this.rigidBody.setNextKinematicTranslation(newPosition);
     this.character.position.copy(this.rigidBody.translation());
   }
 }
