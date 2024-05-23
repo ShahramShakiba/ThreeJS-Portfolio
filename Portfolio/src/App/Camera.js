@@ -11,7 +11,7 @@ export default class Camera {
     this.sizes = this.sizesStore.getState();
 
     this.setInstance();
-    this.setControls();
+    // this.setControls();
     this.setResizeListener();
   }
 
@@ -25,17 +25,23 @@ export default class Camera {
     this.instance.position.z = 100;
     this.instance.position.y = 20;
   }
+
   setControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
     this.controls.enableDamping = true;
   }
+
   setResizeListener() {
     this.sizesStore.subscribe((sizes) => {
       this.instance.aspect = sizes.width / sizes.height;
       this.instance.updateProjectionMatrix();
     });
   }
+
   loop() {
-    this.controls.update();
+    this.character = this.app.world.character?.rigidBody;
+    if (this.character) {
+      this.instance.position.copy(this.character.translation());
+    }
   }
 }
