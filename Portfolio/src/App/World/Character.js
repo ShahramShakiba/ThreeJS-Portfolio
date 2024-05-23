@@ -47,6 +47,9 @@ export default class Character {
     );
     this.rigidBody.setTranslation(worldPosition);
     this.rigidBody.setRotation(worldRotation);
+
+    this.characterController =
+      this.physics.world.createCharacterController(0.01);
   }
 
   loop() {
@@ -66,9 +69,11 @@ export default class Character {
 
     movement.normalize().multiplyScalar(0.3);
 
+    this.characterController.computeColliderMovement(this.collider, movement);
+
     const newPosition = new THREE.Vector3()
       .copy(this.rigidBody.translation())
-      .add(movement);
+      .add(this.characterController.computedMovement());
     this.rigidBody.setNextKinematicTranslation(newPosition);
 
     this.character.position.copy(this.rigidBody.translation());
