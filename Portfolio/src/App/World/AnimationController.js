@@ -11,10 +11,14 @@ export default class AnimationController {
   }
 
   instantiateAnimations() {
-    const idle = this.avatar.animations[1];
+    const idle = this.avatar.animations[0];
     this.mixer = new THREE.AnimationMixer(this.avatar.scene);
-    const idleAction = this.mixer.clipAction(idle);
-    idleAction.play();
+    this.animations = new Map();
+    this.avatar.animations.forEach((clip) => {
+      this.animations.set(clip.name, this.mixer.clipAction(clip));
+    });
+
+    this.animations.get('idle').play();
   }
 
   loop(deltaTime) {
