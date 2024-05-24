@@ -19,8 +19,8 @@ export default class Camera {
     this.instance = new THREE.PerspectiveCamera(
       35,
       this.sizes.width / this.sizes.height,
-      0.1,
-      200
+      1,
+      600
     );
     this.instance.position.z = 100;
     this.instance.position.y = 20;
@@ -46,16 +46,16 @@ export default class Camera {
       const characterPosition = this.characterController.translation();
       const characterRotation = this.characterController.rotation();
 
-      const cameraOffset = new THREE.Vector3(0, 30, 55);
+      const cameraOffset = new THREE.Vector3(0, 5, 20);
       cameraOffset.applyQuaternion(characterRotation);
       cameraOffset.add(characterPosition);
 
-      const targetOffset = new THREE.Vector3(0, 10, 0);
+      const targetOffset = new THREE.Vector3(0, 2, 0);
       targetOffset.applyQuaternion(characterRotation);
       targetOffset.add(characterPosition);
 
-      this.instance.position.lerp(cameraOffset, 0.08);
-      this.controls.target.lerp(targetOffset, 0.08);
+      this.instance.position.lerp(cameraOffset, 0.1);
+      this.controls.target.lerp(targetOffset, 0.1);
     }
   }
 }
