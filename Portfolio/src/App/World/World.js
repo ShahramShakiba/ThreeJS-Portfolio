@@ -4,6 +4,7 @@ import Physics from './Physics.js';
 import Character from './Character.js';
 import Environment from './Environment.js';
 import { appStateStore } from '../Utils/Store.js';
+import CharacterController from './CharacterController.js';
 
 export default class World {
   constructor() {
@@ -12,10 +13,12 @@ export default class World {
 
     //========= create World classes
     this.physics = new Physics();
-    appStateStore.subscribe((state) => {
+    const unsub = appStateStore.subscribe((state) => {
       if (state.physicsReady) {
         this.environment = new Environment();
         this.character = new Character();
+        this.characterController = new CharacterController();
+        unsub();
       }
     });
 
@@ -24,6 +27,14 @@ export default class World {
 
   loop(deltaTime, elapsedTime) {
     this.physics.loop();
-    if (this.character) this.character.loop(deltaTime);
+    if (this.characterController) this.characterController.loop();
   }
 }
+
+/* unsub = unsubscribe
+- zustand provide a return value when you actually call the subscribe
+- the return value is unsub
+
+- then we can pass this in after we create all of our classes 
+- it means, we're no longer going to be listening to changes in the actual appStateStore 
+*/

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
+import assetStore from './AssetStore';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import assetStore from './AssetStore';
 
 export default class AssetLoader {
   constructor() {
@@ -15,7 +15,7 @@ export default class AssetLoader {
 
   instantiateLoader() {
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('/draco/');
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
     this.gltfLoader = new GLTFLoader();
     this.gltfLoader.setDRACOLoader(dracoLoader);
     this.textureLoader = new THREE.TextureLoader();
@@ -37,3 +37,7 @@ export default class AssetLoader {
     });
   }
 }
+
+/* Draco Loader Address
+   - https://www.gstatic.com/draco/v1/decoders/
+*/

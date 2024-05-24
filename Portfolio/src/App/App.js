@@ -24,7 +24,7 @@ export default class App {
     this.assetLoader = new AssetLoader();
 
     //^^^^^^ Asset Loader
-    // this.preloader = new Preloader();
+    this.preloader = new Preloader();
     this.inputController = new InputController();
 
     //^^^^^^ Camera & Renderer

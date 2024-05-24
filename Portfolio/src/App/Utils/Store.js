@@ -1,4 +1,5 @@
 import { createStore } from 'zustand/vanilla';
+import assetStore from './AssetStore';
 
 export const sizesStore = createStore(() => ({
   width: window.innerWidth,
@@ -8,6 +9,7 @@ export const sizesStore = createStore(() => ({
 
 export const appStateStore = createStore(() => ({
   physicsReady: false,
+  assetReady: false,
 }));
 
 export const inputStore = createStore(() => ({

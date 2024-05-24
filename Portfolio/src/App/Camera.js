@@ -41,10 +41,10 @@ export default class Camera {
   loop() {
     this.controls.update();
 
-    this.character = this.app.world.character?.rigidBody;
-    if (this.character) {
-      const characterPosition = this.character.translation();
-      const characterRotation = this.character.rotation();
+    this.characterController = this.app.world.characterController?.rigidBody;
+    if (this.characterController) {
+      const characterPosition = this.characterController.translation();
+      const characterRotation = this.characterController.rotation();
 
       const cameraOffset = new THREE.Vector3(0, 30, 55);
       cameraOffset.applyQuaternion(characterRotation);
