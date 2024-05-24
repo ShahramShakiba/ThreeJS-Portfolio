@@ -1,5 +1,4 @@
 import { createStore } from 'zustand/vanilla';
-import assetStore from './AssetStore';
 
 export const sizesStore = createStore(() => ({
   width: window.innerWidth,
