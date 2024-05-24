@@ -21,22 +21,26 @@ export default class AnimationController {
       this.animations.set(clip.name, this.mixer.clipAction(clip));
     });
 
-    this.animations.get('idle').play();
+    this.currentAction = this.animations.get('idle');
+    this.currentAction.play();
+  }
+
+  playAnimation(name) {
+    if (this.currentAction === this.animations.get(name)) return;
+    
+    const action = this.animations.get(name);
+    action.reset();
+    action.play();
+    action.crossFadeFrom(this.currentAction, 0.2);
+
+    this.currentAction = action;
   }
 
   onInput(input) {
     if (input.forward || input.backward || input.left || input.right) {
-      this.animations.get('run').reset();
-      this.animations.get('run').play();
-      this.animations
-        .get('run')
-        .crossFadeFrom(this.animations.get('idle'), 0.3);
+      this.playAnimation('run');
     } else {
-      this.animations.get('idle').reset();
-      this.animations.get('idle').play();
-      this.animations
-        .get('idle')
-        .crossFadeFrom(this.animations.get('run'), 0.3);
+      this.playAnimation('idle');
     }
   }
 
