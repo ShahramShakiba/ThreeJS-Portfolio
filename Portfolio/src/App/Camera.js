@@ -50,11 +50,11 @@ export default class Camera {
       cameraOffset.applyQuaternion(characterRotation);
       cameraOffset.add(characterPosition);
 
-      const targetOffset = new THREE.Vector3(0, 9, 0);
+      const targetOffset = new THREE.Vector3(0, 12, 0);
       targetOffset.applyQuaternion(characterRotation);
       targetOffset.add(characterPosition);
 
-      this.instance.position.lerp(cameraOffset, 0.1);
+      this.instance.position.lerp(cameraOffset,0.1);
       this.controls.target.lerp(targetOffset, 0.1);
     }
   }

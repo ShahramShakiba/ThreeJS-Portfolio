@@ -20,38 +20,9 @@ export default class Environment {
     const environmentScene = this.environment.scene;
     this.scene.add(environmentScene);
 
-    this.pane.addBinding(environmentScene, 'position', {
-      min: -100,
-      max: 100,
-      step: 0.1,
-    });
-
-    this.pane.addBinding(environmentScene, 'rotation', {
-      min: -Math.PI,
-      max: Math.PI,
-      step: 0.01,
-    });
-
-    const scale = { value: 1 };
-    this.pane
-      .addBinding(scale, 'value', {
-        min: 0,
-        max: 5,
-        step: 0.01,
-      })
-      .on('change', (scale) => {
-        environmentScene.scale.setScalar(scale.value);
-      });
-
     environmentScene.position.set(-20.2, 0, -23.5);
     environmentScene.rotation.set(0, -0.32, 0);
     environmentScene.scale.setScalar(2.5);
-
-    // environmentScene.traverse((obj) => {
-    //   if (obj.isMesh) {
-    //     this.physics.add(obj, 'fixed', 'cuboid');
-    //   }
-    // });
 
     // objects that can cast shadows
     const physicalObjects = [
@@ -63,6 +34,17 @@ export default class Environment {
       'floor',
       'bushes',
     ];
+
+    const shadowCasters = [
+      'trees',
+      'terrain',
+      'rocks',
+      'stairs',
+      'gates',
+      'bushes',
+    ];
+
+    const shadowReceivers = ['terrain', 'floor'];
 
     // loop through the top level of the environment scene (all of the named objects in the blender)
     for (const child of environmentScene.children) {
@@ -78,6 +60,28 @@ export default class Environment {
           }
         });
       }
+
+      const isShadowCaster = shadowCasters.some((keyword) =>
+        child.name.includes(keyword)
+      );
+      if (isShadowCaster) {
+        child.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.castShadow = true;
+          }
+        });
+      }
+
+      const isShadowReceiver = shadowReceivers.some((keyword) =>
+        child.name.includes(keyword)
+      );
+      if (isShadowReceiver) {
+        child.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.receiveShadow = true;
+          }
+        });
+      }
     }
   }
 
@@ -85,9 +89,16 @@ export default class Environment {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.scene.add(ambientLight);
 
-    this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    this.directionalLight.position.set(1, 1, 1);
+    this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    this.directionalLight.position.set(20, 38, 22);
     this.directionalLight.castShadow = true;
+    this.directionalLight.shadow.camera.top = 60;
+    this.directionalLight.shadow.camera.right = 60;
+    this.directionalLight.shadow.camera.left = -60;
+    this.directionalLight.shadow.camera.bottom = -60;
+    this.directionalLight.shadow.bias = -0.004;
+    this.directionalLight.shadow.normalBias = 0.72;
+
     this.scene.add(this.directionalLight);
   }
 }
