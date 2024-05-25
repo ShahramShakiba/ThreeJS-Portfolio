@@ -46,42 +46,22 @@ export default class Environment {
 
     const shadowReceivers = ['terrain', 'floor'];
 
-    // loop through the top level of the environment scene (all of the named objects in the blender)
     for (const child of environmentScene.children) {
-      // check if the name of the object includes any of the strings in the physicalObjects array
-      const isPhysicalObject = physicalObjects.some((keyword) =>
-        child.name.includes(keyword)
-      );
-      if (isPhysicalObject) {
-        // if it does, traverse the object and all meshes to the physical world
-        child.traverse((obj) => {
-          if (obj.isMesh) {
+      child.traverse((obj) => {
+        if (obj.isMesh) {
+          obj.castShadow = shadowCasters.some((keyword) =>
+            child.name.includes(keyword)
+          );
+
+          obj.receiveShadow = shadowReceivers.some((keyword) =>
+            child.name.includes(keyword)
+          );
+
+          if (physicalObjects.some((keyword) => child.name.includes(keyword))) {
             this.physics.add(obj, 'fixed', 'cuboid');
           }
-        });
-      }
-
-      const isShadowCaster = shadowCasters.some((keyword) =>
-        child.name.includes(keyword)
-      );
-      if (isShadowCaster) {
-        child.traverse((obj) => {
-          if (obj.isMesh) {
-            obj.castShadow = true;
-          }
-        });
-      }
-
-      const isShadowReceiver = shadowReceivers.some((keyword) =>
-        child.name.includes(keyword)
-      );
-      if (isShadowReceiver) {
-        child.traverse((obj) => {
-          if (obj.isMesh) {
-            obj.receiveShadow = true;
-          }
-        });
-      }
+        }
+      });
     }
   }
 

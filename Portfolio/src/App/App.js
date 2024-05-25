@@ -1,13 +1,14 @@
 import * as THREE from 'three';
 import Camera from './Camera.js';
+import GUI from './Utils/GUI.js';
 import Loop from './Utils/Loop.js';
 import Renderer from './Renderer.js';
 import World from './World/World.js';
 import Resize from './Utils/Resize.js';
 import Preloader from '/App/UI/Preloader.js';
+import ModalManager from './UI/ModalManager.js';
 import AssetLoader from './Utils/AssetLoader.js';
 import InputController from './UI/InputController.js';
-import GUI from './Utils/GUI.js';
 
 // to avoid maximum call stack size error
 let instance = null;
@@ -16,6 +17,8 @@ export default class App {
   constructor() {
     if (instance) return instance;
     instance = this;
+
+    window.ModalManager = new ModalManager();
 
     //^^^^^^ Threejs Elements
     this.canvas = document.querySelector('canvas.threejs');
