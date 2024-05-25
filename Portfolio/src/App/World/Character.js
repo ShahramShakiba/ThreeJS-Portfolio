@@ -21,13 +21,13 @@ export default class Character {
       visible: false,
     });
     this.instance = new THREE.Mesh(geometry, material);
-    this.instance.position.set(0, 4, 0);
+    this.instance.position.set(0, 0, 0);
     this.scene.add(this.instance);
 
     // add avatar to character
     const avatar = this.avatar.scene;
     avatar.rotation.y = Math.PI;
-    avatar.position.y = -1;
+    avatar.position.y = 0;
     avatar.scale.setScalar(2);
     this.instance.add(avatar);
   }
