@@ -14,6 +14,7 @@ export default class Environment {
 
     this.loadEnvironment();
     this.addLights();
+    // this.addGround();
   }
 
   loadEnvironment() {
@@ -36,16 +37,16 @@ export default class Environment {
     this.pane
       .addBinding(scale, 'value', {
         min: 0,
-        max: 3,
+        max: 5,
         step: 0.01,
       })
-      .on('change', () => {
+      .on('change', (scale) => {
         environmentScene.scale.setScalar(scale.value);
       });
 
-    environmentScene.position.set(-4.8, 0, -7.4);
-    environmentScene.rotation.set(0, -0.6, 0);
-    environmentScene.scale.setScalar(1.3);
+    environmentScene.position.set(-20.2, 0, -23.5);
+    environmentScene.rotation.set(0, -0.32, 0);
+    environmentScene.scale.setScalar(2.5);
 
     environmentScene.traverse((obj) => {
       if (obj.isMesh) {
@@ -63,4 +64,13 @@ export default class Environment {
     this.directionalLight.castShadow = true;
     this.scene.add(this.directionalLight);
   }
+
+  // addGround() {
+  //   const gG = new THREE.BoxGeometry(100, 1, 100);
+  //   const gM = new THREE.MeshStandardMaterial({ color: 'green' });
+
+  //   this.gMesh = new THREE.Mesh(gG, gM);
+  //   this.scene.add(this.gMesh);
+  //   this.physics.add(this.gMesh, 'fixed', 'cuboid');
+  // }
 }

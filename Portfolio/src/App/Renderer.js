@@ -24,14 +24,20 @@ export default class Renderer {
     this.instance.setPixelRatio(this.sizes.pixelRatio);
 
     this.instance.outputEncoding = THREE.sRGBEncoding;
-    // this.instance.outputColorSpace = THREE.SRGBColorSpace;
+    // this.instance.shadowMap.enabled = true;
+    // this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    // this.instance.toneMapping = THREE.ACESFilmicToneMapping
+    // this.instance.toneMappingExposure = 0.8
   }
+
   setResizeListener() {
     this.sizesStore.subscribe((sizes) => {
       this.instance.setSize(sizes.width, sizes.height);
       this.instance.setPixelRatio(sizes.pixelRatio);
     });
   }
+  
   loop() {
     this.instance.render(this.scene, this.camera.instance);
   }

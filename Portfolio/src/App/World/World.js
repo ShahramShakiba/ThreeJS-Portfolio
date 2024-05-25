@@ -15,7 +15,7 @@ export default class World {
     //========= create World classes
     this.physics = new Physics();
     const unsub = appStateStore.subscribe((state) => {
-      if (state.physicsReady) {
+      if (state.physicsReady && state.assetReady) {
         this.environment = new Environment();
         this.character = new Character();
         this.characterController = new CharacterController();
