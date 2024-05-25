@@ -7,6 +7,7 @@ import Resize from './Utils/Resize.js';
 import Preloader from '/App/UI/Preloader.js';
 import AssetLoader from './Utils/AssetLoader.js';
 import InputController from './UI/InputController.js';
+import GUI from './Utils/GUI.js';
 
 // to avoid maximum call stack size error
 let instance = null;
@@ -19,6 +20,9 @@ export default class App {
     //^^^^^^ Threejs Elements
     this.canvas = document.querySelector('canvas.threejs');
     this.scene = new THREE.Scene();
+
+    // add debug GUI
+    this.gui = new GUI();
 
     //^^^^^^ Asset Loader
     this.assetLoader = new AssetLoader();

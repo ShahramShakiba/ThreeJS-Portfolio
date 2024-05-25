@@ -34,7 +34,7 @@ export default class CharacterController {
     this.rigidBody = this.physics.world.createRigidBody(this.rigidBodyType);
 
     // Create a cuboid collider
-    this.colliderType = this.physics.rapier.ColliderDesc.cuboid(1, 2.5, 1);
+    this.colliderType = this.physics.rapier.ColliderDesc.cuboid(0.3, 1, 0.3);
     this.collider = this.physics.world.createCollider(
       this.colliderType,
       this.rigidBody
@@ -84,7 +84,7 @@ export default class CharacterController {
     }
 
     // Normalize and scale movement vector and set y component to -1
-    movement.normalize().multiplyScalar(0.3);
+    movement.normalize().multiplyScalar(0.1);
     movement.y = -1;
 
     // Update collider movement and get new position of rigid body
