@@ -28,7 +28,7 @@ export default class Character {
     const avatar = this.avatar.scene;
     avatar.rotation.y = Math.PI;
     avatar.position.y = 0;
-    avatar.scale.setScalar(2);
+    avatar.scale.setScalar(2.5);
     this.instance.add(avatar);
   }
 }

@@ -87,8 +87,8 @@ export default class Environment {
 
   addPortals() {
     const portalMesh1 = this.environment.scene.getObjectByName('portals');
-    const portalMesh2 = this.environment.scene.getObjectByName('portals001');
-    const portalMesh3 = this.environment.scene.getObjectByName('portals002');
+    const portalMesh2 = this.environment.scene.getObjectByName('portals002');
+    const portalMesh3 = this.environment.scene.getObjectByName('portals001');
 
     const modalContentProvider = new ModalContentProvider();
 
