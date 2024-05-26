@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import App from '../App.js';
+import Portal from './Portal';
 import assetStore from '../Utils/AssetStore.js';
+import ModalContentProvider from '../UI/ModalContentProvider.js';
 
 export default class Environment {
   constructor() {
@@ -14,6 +16,7 @@ export default class Environment {
 
     this.loadEnvironment();
     this.addLights();
+    this.addPortals();
   }
 
   loadEnvironment() {
@@ -80,6 +83,27 @@ export default class Environment {
     this.directionalLight.shadow.normalBias = 0.72;
 
     this.scene.add(this.directionalLight);
+  }
+
+  addPortals() {
+    const portalMesh1 = this.environment.scene.getObjectByName('portals');
+    const portalMesh2 = this.environment.scene.getObjectByName('portals001');
+    const portalMesh3 = this.environment.scene.getObjectByName('portals002');
+
+    const modalContentProvider = new ModalContentProvider();
+
+    this.portal1 = new Portal(
+      portalMesh1,
+      modalContentProvider.getModalInfo('aboutMe')
+    );
+    this.portal2 = new Portal(
+      portalMesh2,
+      modalContentProvider.getModalInfo('projects')
+    );
+    this.portal3 = new Portal(
+      portalMesh3,
+      modalContentProvider.getModalInfo('contactMe')
+    );
   }
 }
 

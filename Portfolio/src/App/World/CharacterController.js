@@ -53,7 +53,7 @@ export default class CharacterController {
       this.physics.world.createCharacterController(0.01);
     this.characterController.setApplyImpulsesToDynamicBodies(true);
     // steps height
-    this.characterController.enableAutostep(1, 0.1, false);
+    this.characterController.enableAutostep(1.05, 0.1, false);
     this.characterController.enableSnapToGround(1);
   }
 

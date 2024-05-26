@@ -5,6 +5,7 @@ export default class ModalManager {
       // this.close.onclick = () => {
       //   this.closeModal()
       // }
+      
     }
   
     openModal(title, description) {

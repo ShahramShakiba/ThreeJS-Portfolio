@@ -1,3 +1,3 @@
 export default class Portal {
-  constructor() {}
+  constructor(portalMesh, modalInfo) {}
 }
