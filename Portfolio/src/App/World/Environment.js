@@ -105,6 +105,12 @@ export default class Environment {
       modalContentProvider.getModalInfo('contactMe')
     );
   }
+
+  loop() {
+    this.portal1.loop();
+    this.portal2.loop();
+    this.portal3.loop();
+  }
 }
 
 /* 

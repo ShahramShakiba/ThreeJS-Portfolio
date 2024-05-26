@@ -30,6 +30,7 @@ export default class World {
 
   loop(deltaTime, elapsedTime) {
     this.physics.loop();
+    if (this.environment) this.environment.loop();
     if (this.characterController) this.characterController.loop();
     if (this.animationController) this.animationController.loop(deltaTime);
   }
