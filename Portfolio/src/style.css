@@ -70,6 +70,24 @@ body {
   }
 }
 
+.mute {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  border: none;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 1.5rem;
+  font-family: 'Amatic SC';
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.mute:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
 .modal {
   display: none;
   position: fixed;
