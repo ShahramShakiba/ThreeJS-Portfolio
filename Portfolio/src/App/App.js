@@ -41,6 +41,13 @@ export default class App {
     //^^^^^^ World
     this.world = new World();
 
+    // Load Texture
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load('/textures/8k_stars_milky_way.jpg');
+
+    // Apply Texture to Scene Background
+    this.scene.background = texture;
+
     //^^^^^^ Extra Utils
     this.loop = new Loop();
     this.resize = new Resize();

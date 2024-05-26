@@ -84,7 +84,6 @@ body {
   overflow: auto;
   opacity: 0;
   transition: opacity 0.6s ease;
-  scroll-behavior: auto;
 }
 
 .modal.fadeIn {
@@ -187,7 +186,7 @@ body {
   & a {
     text-decoration: none;
     color: purple;
-    font-weight: 400;
+    font-weight: 500;
   }
 }
 
@@ -195,15 +194,15 @@ body {
   & p {
     display: inline-block;
     margin-bottom: 0;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: rgb(43, 42, 42);
-    font-weight: 400;
+    font-weight: 700;
   }
 
   & a {
     display: block;
     text-decoration: none;
     color: purple;
-    font-weight: 300;
+    font-weight: 400;
   }
 }
