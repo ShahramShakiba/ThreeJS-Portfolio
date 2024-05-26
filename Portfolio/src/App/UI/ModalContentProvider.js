@@ -28,7 +28,7 @@ export default class ModalContentProvider {
         description: `<div class="projects-container">
                 <p class="title">Three.js:</p>
                 <p class="desc">&nbsp; 
-                  <a href="">
+                  <a href="https://github.com/ShahramShakiba/ThreeJS-Portfolio">
                       Portfolio
                   </a>
                 </p>
@@ -46,7 +46,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">Framer Motion:</p>
                 <p class="desc">&nbsp; 
-                  <a href="https://framer-motion-challenges-shahram.netlify.app/" target="_blank">
+                  <a href="https://github.com/ShahramShakiba/Framer-Motion-Basic" target="_blank">
                     React Challenges
                   </a>
                 </p>
@@ -55,7 +55,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">React.js:</p>
                 <p class="desc">&nbsp; 
-                  <a href="https://react-events-shahram.netlify.app/events" target="_blank">
+                  <a href="https://github.com/ShahramShakiba/ReactJS-Advanced-Course" target="_blank">
                     React Events
                   </a>
                 </p>
@@ -64,7 +64,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">React.js:</p>
                 <p class="desc">&nbsp; 
-                  <a href="https://newsletter-react-router-auth-shahram.netlify.app/" target="_blank">
+                  <a href="https://github.com/ShahramShakiba/ReactJS-Advanced-Course" target="_blank">
                     Newsletter
                   </a>
                 </p>
@@ -73,7 +73,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">React.js:</p>
                 <p class="desc">&nbsp; 
-                  <a href="https://ordering-food-http-shahram.netlify.app/" target="_blank">
+                  <a href="https://github.com/ShahramShakiba/ReactJS-Advanced-Course" target="_blank">
                     Ordering Food
                   </a>
                 </p>
@@ -82,7 +82,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">React.js:</p>
                 <p class="desc">&nbsp; 
-                  <a href="https://placepicker-customhook-shahram.netlify.app/"_blank">
+                  <a href="https://github.com/ShahramShakiba/ReactJS-Advanced-Course" target="_blank">
                      Place Picker
                   </a>
                 </p>
@@ -91,7 +91,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">Tailwindcss:</p>
                 <p class="desc">&nbsp; 
-                  <a href="https://shahramshakiba.github.io/Bank-Landing-Page/">
+                  <a href="https://github.com/ShahramShakiba/Bank-Landing-Page">
                       Bank Landing Page 
                   </a>
                 </p>
@@ -100,7 +100,7 @@ export default class ModalContentProvider {
               <div class="projects-container">
                 <p class="title">Tailwindcss:</p>
                 <p class="desc">&nbsp;
-                  <a href="https://shahramshakiba.github.io/HomeSmart-Landing-Page/">
+                  <a href="https://github.com/ShahramShakiba/HomeSmart-Landing-Page">
                     HomeSmart Landing Page 
                   </a>
                 </p>
