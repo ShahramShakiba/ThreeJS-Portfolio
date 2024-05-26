@@ -3,8 +3,25 @@ export default class ModalContentProvider {
     this.modalContents = {
       aboutMe: {
         title: 'About me',
-        description:
-          'I take pride in the fact that these interfaces enhance user experiences and simplify complex interactions, ultimately creating a more engaging Online Environment for all users. <br/> I am proactive in my pursuit of knowledge, constantly seeking ways to broaden my expertise and stay up-to-date with the latest industry trends and emerging technologies',
+        description:`
+          <div class="aboutMe-Container">
+            <div>
+              <img src="../../Assets/Sh.jpg" alt="Shahram-image" />
+            </div>
+            <p>
+               I am dedicated to enhancing user experiences through streamlined interfaces, ultimately fostering a more engaging online environment.
+            </p>
+
+            <p>
+               Additionally, I am committed to continuously expanding my knowledge and staying current with industry trends and emerging technologies through proactive learning initiatives.
+            </p>
+
+            <p>
+               I prioritize effective communication and possess a solid technical background.
+               My commitment lies in developing strong relationships with my team members and clients.
+            </p>
+          </div>
+          `,
       },
       projects: {
         title: 'Projects',
