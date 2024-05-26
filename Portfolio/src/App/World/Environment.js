@@ -17,6 +17,7 @@ export default class Environment {
     this.loadEnvironment();
     this.addLights();
     this.addPortals();
+    this.addGround();
   }
 
   loadEnvironment() {
@@ -83,6 +84,37 @@ export default class Environment {
     this.directionalLight.shadow.normalBias = 0.72;
 
     this.scene.add(this.directionalLight);
+  }
+
+  addGround() {
+    // Load texture
+    const textureLoader = new THREE.TextureLoader();
+    const groundTexture = textureLoader.load(
+      '/textures/wispy-grass-meadow_albedo.png'
+    );
+
+    // Adjust texture repeat and wrap mode
+    groundTexture.wrapS = THREE.RepeatWrapping;
+    groundTexture.wrapT = THREE.RepeatWrapping;
+    groundTexture.repeat.set(100, 100); // Adjust repeat values as needed
+
+    // Create material with texture
+    const groundMaterial = new THREE.MeshStandardMaterial({
+      map: groundTexture,
+    });
+
+    // Create ground geometry
+    const groundGeometry = new THREE.PlaneGeometry(5000, 5000); // Adjust size as needed
+
+    // Create ground mesh
+    const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+    groundMesh.rotation.x = -Math.PI / 2; // Rotate to make it horizontal
+    groundMesh.position.y = 0; // Adjust position as needed to avoid clipping
+    groundMesh.receiveShadow = true; 
+    this.scene.add(groundMesh);
+
+    // Add ground mesh to physics simulation if needed
+    this.physics.add(groundMesh, 'fixed', 'cuboid');
   }
 
   addPortals() {
