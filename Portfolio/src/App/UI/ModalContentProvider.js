@@ -92,9 +92,24 @@ export default class ModalContentProvider {
       },
       contactMe: {
         title: 'Contact Me',
-        description: `LinkedIn: <a href="https://www.linkedin.com/in/shahramshakiba/" target="_blank" style="text-decoration: none;">www.linkedin.com/in/shahramshakiba/</a> <br/>
+        description: `
+        <div class="contactMe-container">
+          <p> LinkedIn: </p>
+          <a href="https://www.linkedin.com/in/shahramshakiba/" target="_blank" >
+              www.linkedin.com/in/shahramshakiba/
+          </a> <br/>
           
-          GitHub: <a href="https://github.com/ShahramShakiba" target="_blank" style="text-decoration: none;">github.com/ShahramShakiba</a>`,
+          <p> GitHub: </p>
+          <a href="https://github.com/ShahramShakiba" target="_blank">
+              github.com/ShahramShakiba
+          </a> <br/>
+
+          <p> Gmail: </p>
+          <a href="mailto:shahramshakibaa@gmail.com" target="_blank">
+            shahramshakibaa@gmail.com
+          </a>
+        </div>
+       `,
       },
     };
   }

@@ -155,15 +155,35 @@ body {
 }
 
 .projects-container .title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   display: inline;
+  color: rgb(43, 42, 42);
+  font-weight: 500;
 }
 
 .projects-container .desc {
   display: inline-block;
-  
+
   & a {
     text-decoration: none;
     color: purple;
+    font-weight: 400;
+  }
+}
+
+.contactMe-container {
+  & p {
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 1.2rem;
+    color: rgb(43, 42, 42);
+    font-weight: 400;
+  }
+
+  & a {
+    display: block;
+    text-decoration: none;
+    color: purple;
+    font-weight: 300;
   }
 }
