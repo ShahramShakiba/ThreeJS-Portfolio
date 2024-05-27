@@ -28,14 +28,12 @@ export default class Renderer {
     this.instance.toneMapping = THREE.ACESFilmicToneMapping;
     this.instance.toneMappingExposure = 1.1;
   }
-
   setResizeListener() {
     this.sizesStore.subscribe((sizes) => {
       this.instance.setSize(sizes.width, sizes.height);
       this.instance.setPixelRatio(sizes.pixelRatio);
     });
   }
-
   loop() {
     this.instance.render(this.scene, this.camera.instance);
   }

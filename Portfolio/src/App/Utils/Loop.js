@@ -16,7 +16,6 @@ export default class Loop {
     const elapsedTime = this.clock.getElapsedTime();
     const deltaTime = elapsedTime - this.previousElapsedTime;
     this.previousElapsedTime = elapsedTime;
-
     this.camera.loop();
     this.renderer.loop();
     this.world.loop(deltaTime, elapsedTime);

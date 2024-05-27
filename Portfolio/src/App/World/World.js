@@ -35,11 +35,3 @@ export default class World {
     if (this.animationController) this.animationController.loop(deltaTime);
   }
 }
-
-/* unsub = unsubscribe
-- zustand provide a return value when you actually call the subscribe
-- the return value is unsub
-
-- then we can pass this in after we create all of our classes 
-- it means, we're no longer going to be listening to changes in the actual appStateStore 
-*/

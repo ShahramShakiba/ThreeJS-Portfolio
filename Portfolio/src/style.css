@@ -133,7 +133,6 @@ body {
   margin: 0 auto;
   color: white;
   text-decoration: none;
-  /* Set text color to white within the modal */
 }
 
 .close {
@@ -146,7 +145,6 @@ body {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   color: #fff;
-  /* Set the color of the button text to white */
   font-size: 20px;
   font-weight: bold;
   transition: 0.6s all;

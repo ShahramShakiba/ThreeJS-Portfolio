@@ -4,12 +4,10 @@ import { appStateStore } from '../Utils/Store';
 export default class Preloader {
   constructor() {
     this.assetStore = assetStore;
-
     //===== Access to DOM Elements
     this.overlay = document.querySelector('.overlay');
     this.loading = document.querySelector('.loading');
     this.startButton = document.querySelector('.start');
-
     this.assetStore.subscribe((state) => {
       this.numberOfLoadedAssets = Object.keys(state.loadedAssets).length;
       this.numberOfAssetsToLoad = state.assetsToLoad.length;
@@ -18,7 +16,6 @@ export default class Preloader {
 
       //===== Update progressPercentage in real-time
       document.getElementById('progressPercentage').innerHTML = this.progress;
-
       if (this.progress === 100) {
         appStateStore.setState({ assetReady: true });
         this.loading.classList.add('fade');
@@ -27,12 +24,10 @@ export default class Preloader {
     });
   }
 
-  //===== Ready - all assets are being loaded
   ready() {
     this.loading.remove();
     this.startButton.style.display = 'inline';
     this.startButton.classList.add('fadeIn');
-
     this.startButton.addEventListener(
       'click',
       () => {

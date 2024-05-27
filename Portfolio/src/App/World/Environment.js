@@ -10,7 +10,6 @@ export default class Environment {
     this.scene = this.app.scene;
     this.physics = this.app.world.physics;
     this.pane = this.app.gui.pane;
-
     this.assetStore = assetStore.getState();
     this.environment = this.assetStore.loadedAssets.environment;
 
@@ -38,7 +37,6 @@ export default class Environment {
       'floor',
       'bushes',
     ];
-
     const shadowCasters = [
       'trees',
       'terrain',
@@ -47,7 +45,6 @@ export default class Environment {
       'gates',
       'bushes',
     ];
-
     const shadowReceivers = ['terrain', 'floor'];
 
     for (const child of environmentScene.children) {
@@ -56,7 +53,6 @@ export default class Environment {
           obj.castShadow = shadowCasters.some((keyword) =>
             child.name.includes(keyword)
           );
-
           obj.receiveShadow = shadowReceivers.some((keyword) =>
             child.name.includes(keyword)
           );
@@ -82,38 +78,31 @@ export default class Environment {
     this.directionalLight.shadow.camera.bottom = -60;
     this.directionalLight.shadow.bias = -0.004;
     this.directionalLight.shadow.normalBias = 0.72;
-
     this.scene.add(this.directionalLight);
   }
 
   addGround() {
-    // Load texture
     const textureLoader = new THREE.TextureLoader();
     const groundTexture = textureLoader.load(
-      '/textures/wispy-grass-meadow_albedo.png'
+      '../textures/wispy-grass-meadow_albedo.png'
     );
 
     // Adjust texture repeat and wrap mode
     groundTexture.wrapS = THREE.RepeatWrapping;
     groundTexture.wrapT = THREE.RepeatWrapping;
-    groundTexture.repeat.set(100, 100); // Adjust repeat values as needed
+    groundTexture.repeat.set(100, 100); 
 
-    // Create material with texture
     const groundMaterial = new THREE.MeshStandardMaterial({
       map: groundTexture,
     });
-
-    // Create ground geometry
-    const groundGeometry = new THREE.PlaneGeometry(5000, 5000); // Adjust size as needed
+    const groundGeometry = new THREE.PlaneGeometry(5000, 5000); 
 
     // Create ground mesh
     const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-    groundMesh.rotation.x = -Math.PI / 2; // Rotate to make it horizontal
-    groundMesh.position.y = 0; // Adjust position as needed to avoid clipping
+    groundMesh.rotation.x = -Math.PI / 2; 
+    groundMesh.position.y = 0; 
     groundMesh.receiveShadow = true; 
     this.scene.add(groundMesh);
-
-    // Add ground mesh to physics simulation if needed
     this.physics.add(groundMesh, 'fixed', 'cuboid');
   }
 
@@ -121,7 +110,6 @@ export default class Environment {
     const portalMesh1 = this.environment.scene.getObjectByName('portals');
     const portalMesh2 = this.environment.scene.getObjectByName('portals002');
     const portalMesh3 = this.environment.scene.getObjectByName('portals001');
-
     const modalContentProvider = new ModalContentProvider();
 
     this.portal1 = new Portal(
@@ -144,17 +132,3 @@ export default class Environment {
     this.portal3.loop();
   }
 }
-
-/* 
-  this.addGround();
-
-  addGround() {
-    const gG = new THREE.BoxGeometry(100, 1, 100);
-    const gM = new THREE.MeshStandardMaterial({ color: 'green' });
-
-    this.gMesh = new THREE.Mesh(gG, gM);
-    this.scene.add(this.gMesh);
-    this.physics.add(this.gMesh, 'fixed', 'cuboid');
-  }
-
-*/

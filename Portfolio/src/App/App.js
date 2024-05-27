@@ -20,51 +20,47 @@ export default class App {
 
     window.ModalManager = new ModalManager();
 
-    //^^^^^^ Threejs Elements
+    //Threejs Elements
     this.canvas = document.querySelector('canvas.threejs');
     this.scene = new THREE.Scene();
 
-    // add debug GUI
+    //add debug GUI
     this.gui = new GUI();
 
-    //^^^^^^ Asset Loader
+    //Asset Loader
     this.assetLoader = new AssetLoader();
 
-    //^^^^^^ Asset Loader
+    //Asset Loader
     this.preloader = new Preloader();
     this.inputController = new InputController();
 
-    //^^^^^^ Camera & Renderer
+    //Camera & Renderer
     this.camera = new Camera();
     this.renderer = new Renderer();
 
-    //^^^^^^ World
+    //World
     this.world = new World();
 
-    // Load Texture
+    //Load Texture
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/textures/8k_stars_milky_way.jpg');
-
-    // Apply Texture to Scene Background
+    const texture = textureLoader.load(
+      '../textures/2k_stars_milky_way.jpg'
+    );
     this.scene.background = texture;
 
-    //^^^^^^ Add Background Music
+    //Add Background Music
     this.addBackgroundMusic();
 
-    //^^^^^^ Extra Utils
+    //Extra Utils
     this.loop = new Loop();
     this.resize = new Resize();
   }
 
   addBackgroundMusic() {
-    // Create an AudioListener and add it to the camera
     const listener = new THREE.AudioListener();
     this.camera.instance.add(listener);
-
-    // Create a global audio source
     this.sound = new THREE.Audio(listener);
-
-    // Load the sound and set it as the Audio object's buffer
+   
     const audioLoader = new THREE.AudioLoader();
     audioLoader.load('../Assets/music/Solar.mp3', (buffer) => {
       this.sound.setBuffer(buffer);
@@ -72,7 +68,6 @@ export default class App {
       this.sound.setVolume(0.1);
     });
 
-    // Add event listener for the mute button
     const muteButton = document.getElementById('muteButton');
     let isPlaying = false;
     muteButton.addEventListener('click', () => {

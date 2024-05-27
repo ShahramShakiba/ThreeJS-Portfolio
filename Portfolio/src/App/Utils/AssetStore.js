@@ -1,20 +1,22 @@
 import { createStore } from 'zustand/vanilla';
+import avatar from '../../../static/models/avatar.glb';
+import environment from '../../../static/models/environment.glb';
 
 const assetsToLoad = [
   {
     id: 'avatar',
-    path: '/models/avatar.glb',
+    path: avatar,
     type: 'model',
   },
   {
     id: 'environment',
-    path: '/models/environment.glb',
+    path: environment,
     type: 'model',
   },
 ];
 
 const assetStore = createStore((set) => ({
-  assetsToLoad, // or  assetsToLoad: assetsToLoad
+  assetsToLoad,
   loadedAssets: {},
   addLoadedAsset: (asset, id) =>
     set((state) => ({
@@ -25,9 +27,3 @@ const assetStore = createStore((set) => ({
     })),
 }));
 export default assetStore;
-
-/* createStore((set) => ({}))
-- we have this "set" function that we get from our createStore-fn
-- which helps us to set a new "state"
-- within the callback-fn of "set" we can access to a variable that holds information about the "previous state" in your application 
-*/

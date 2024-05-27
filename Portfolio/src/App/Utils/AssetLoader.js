@@ -28,7 +28,6 @@ export default class AssetLoader {
           this.addLoadedAsset(loadedAsset, asset.id);
         });
       }
-
       if (asset.type === 'model') {
         this.gltfLoader.load(asset.path, (loadedAsset) => {
           this.addLoadedAsset(loadedAsset, asset.id);
@@ -37,7 +36,3 @@ export default class AssetLoader {
     });
   }
 }
-
-/* Draco Loader Address
-   - https://www.gstatic.com/draco/v1/decoders/
-*/

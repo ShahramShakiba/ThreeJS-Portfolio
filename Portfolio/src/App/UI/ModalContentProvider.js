@@ -132,9 +132,7 @@ export default class ModalContentProvider {
   }
 
   formatDescription(description) {
-    // Add a <br/> after each period followed by a space
     description = description.replace(/\. /g, '.<br/><br/> ');
-    // Replace <br/> with <br/><br/> to ensure two line breaks
     description = description.replace(/<br\/?>/g, '<br/><br/>');
     return description;
   }
