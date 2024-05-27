@@ -1,4 +1,4 @@
-#  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" /> &nbsp; _Three.js Portfolio_ &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="35" alt="nextjs logo"  />
+##  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" /> &nbsp; _Portfolio | Three.js + Vanilla JS_ &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="35" alt="nextjs logo"  />  <img src="https://skillicons.dev/icons?i=js" height="35" alt="javascript logo"  />
 
 <!----------------------------------------- Description ---------------------------------------->
 ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Bubbles.png" alt="Bubbles" width="40" height="40" />&nbsp; _Description_
