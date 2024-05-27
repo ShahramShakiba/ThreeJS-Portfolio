@@ -21,28 +21,37 @@
 <!--===================== Portfolio =============================-->
 ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" height="30"  /> &nbsp; _Three.js Portfolio_  &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="30" alt="nextjs logo"  />
 
-#### For this project, my goal is.. <br/><br/>
+#### 🧩 For this project, the focus is on creating an interactive experience where users can engage by moving a _Character_ within the 3D environment.
+- By combining these technologies, the project aims to showcase the capabilities of Three.js for creating immersive web experiences. <br/><br/>
 
 > [!IMPORTANT]
->> - It is crucial to grasp ...
+>> - It is crucial to grasp that the project incorporates _"Three.js"_, _"Vite"_ and _"Vanilla JavaScript"_ to build a visually impressive 3D portfolio.
+>> - I developed the Environment for this project using _"Blender"_ from the ground up.
 
 <br/><br/>
 
 > _Which Concepts in Have I Covered_: 
-#### <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2699_fe0f/512.gif" alt="⚙" width="18"> &nbsp; _..._
+##### _Developing classes to encapsulate different components of our code._
+##### _Utilizing the "Zustand" state management library._
+##### _Designing a preloader progress bar to enhance the initial user engagement impact._
+##### _Using "Rapier" for simulating physical interactions in simulations._
+##### _Creating physics helper functions to auto compute dimensions._
+##### _Setting Absolute Position._
+##### _Utilizing a first-person camera for interactions._
+##### _Developing a digital representation (Avatar) of my own identity._
+##### _Incorporating Mixamo animations into my avatar._
+##### _Developing an input controller for utilizing arrow keys._
+##### _Moving Dynamic Bodies_
+##### _Building a 3D environment using "Blender" from the ground up._
+##### _Integrating shadows into the scene._
+##### _and various other topics that were covered in my Basic Three.js Course, such as adding a scene, camera, renderer, orbit controls, ambient light, and directional light and so on..._
  
+<br/><br/>
 
-<br/>
-
-<!-------- try it live -------->
-#### _Give it a go in real-time and give me a Star_ &nbsp; <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25"  /> <a href="" target="_blank"> &nbsp; _Portfolio_ </a> 
-
- 
 <!--------- Video --------->
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Clapper%20Board.webp" alt="Clapper Board" width="35" />
 
 https://github.com/ShahramShakiba/ThreeJS-Portfolio/assets/110089830/c80530a8-84a4-4806-af69-85d60cbf6941
-
 
   <br/> 
 
