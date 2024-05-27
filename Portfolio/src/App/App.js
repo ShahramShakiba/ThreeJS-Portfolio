@@ -48,37 +48,8 @@ export default class App {
     );
     this.scene.background = texture;
 
-    //Add Background Music
-    this.addBackgroundMusic();
-
     //Extra Utils
     this.loop = new Loop();
     this.resize = new Resize();
-  }
-
-  addBackgroundMusic() {
-    const listener = new THREE.AudioListener();
-    this.camera.instance.add(listener);
-    this.sound = new THREE.Audio(listener);
-   
-    const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('../Assets/music/Solar.mp3', (buffer) => {
-      this.sound.setBuffer(buffer);
-      this.sound.setLoop(true);
-      this.sound.setVolume(0.1);
-    });
-
-    const muteButton = document.getElementById('muteButton');
-    let isPlaying = false;
-    muteButton.addEventListener('click', () => {
-      if (isPlaying) {
-        this.sound.pause();
-        muteButton.textContent = 'Start';
-      } else {
-        this.sound.play();
-        muteButton.textContent = 'Mute';
-      }
-      isPlaying = !isPlaying;
-    });
   }
 }
