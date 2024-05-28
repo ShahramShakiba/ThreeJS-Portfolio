@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import App from '../App';
+import App from '../App.js';
 import Physics from './Physics.js';
 import Character from './Character.js';
 import Environment from './Environment.js';

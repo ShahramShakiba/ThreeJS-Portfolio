@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import App from '../App.js';
-import Portal from './Portal';
+import Portal from './Portal.js';
 import assetStore from '../Utils/AssetStore.js';
 import ModalContentProvider from '../UI/ModalContentProvider.js';
 
@@ -84,24 +84,24 @@ export default class Environment {
   addGround() {
     const textureLoader = new THREE.TextureLoader();
     const groundTexture = textureLoader.load(
-      '../textures/wispy-grass-meadow_albedo.png'
+      '../../static/textures/wispy-grass-meadow_albedo.png'
     );
 
     // Adjust texture repeat and wrap mode
     groundTexture.wrapS = THREE.RepeatWrapping;
     groundTexture.wrapT = THREE.RepeatWrapping;
-    groundTexture.repeat.set(100, 100); 
+    groundTexture.repeat.set(100, 100);
 
     const groundMaterial = new THREE.MeshStandardMaterial({
       map: groundTexture,
     });
-    const groundGeometry = new THREE.PlaneGeometry(5000, 5000); 
+    const groundGeometry = new THREE.PlaneGeometry(5000, 5000);
 
     // Create ground mesh
     const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-    groundMesh.rotation.x = -Math.PI / 2; 
-    groundMesh.position.y = 0; 
-    groundMesh.receiveShadow = true; 
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.y = 0;
+    groundMesh.receiveShadow = true;
     this.scene.add(groundMesh);
     this.physics.add(groundMesh, 'fixed', 'cuboid');
   }

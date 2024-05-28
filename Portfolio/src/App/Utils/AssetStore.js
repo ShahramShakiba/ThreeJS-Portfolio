@@ -1,6 +1,6 @@
 import { createStore } from 'zustand/vanilla';
-import avatar from '../../../static/models/avatar.glb';
-import environment from '../../../static/models/environment.glb';
+import avatar from '/static/models/avatar.glb';
+import environment from '/static/models/environment.glb';
 
 const assetsToLoad = [
   {
