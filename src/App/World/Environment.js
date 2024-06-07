@@ -84,7 +84,7 @@ export default class Environment {
   addGround() {
     const textureLoader = new THREE.TextureLoader();
     const groundTexture = textureLoader.load(
-      '../../static/textures/wispy-grass-meadow_albedo.png'
+      '/textures/wispy-grass-meadow_albedo.png'
     );
 
     // Adjust texture repeat and wrap mode

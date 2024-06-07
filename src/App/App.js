@@ -44,7 +44,7 @@ export default class App {
     //Load Texture
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(
-      '../static/textures/2k_stars_milky_way.jpg'
+      '/textures/2k_stars_milky_way.jpg'
     );
     this.scene.background = texture;
 

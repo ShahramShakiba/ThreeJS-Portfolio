@@ -23,13 +23,14 @@ export default class AssetLoader {
 
   startLoading() {
     this.assetsToLoad.forEach((asset) => {
+      const assetPath = new URL(asset.path, import.meta.url).href; // Correctly resolve asset path
       if (asset.type === 'texture') {
-        this.textureLoader.load(asset.path, (loadedAsset) => {
+        this.textureLoader.load(assetPath, (loadedAsset) => {
           this.addLoadedAsset(loadedAsset, asset.id);
         });
       }
       if (asset.type === 'model') {
-        this.gltfLoader.load(asset.path, (loadedAsset) => {
+        this.gltfLoader.load(assetPath, (loadedAsset) => {
           this.addLoadedAsset(loadedAsset, asset.id);
         });
       }

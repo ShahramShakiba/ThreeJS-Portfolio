@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "clean": "node clean.js",
+    "build": "npm run clean && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
