@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" /> &nbsp; _Three.js Portfolio_ &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="35" alt="nextjs logo"  />  <img src="https://skillicons.dev/icons?i=js" height="35" alt="javascript logo"  />
+# <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" /> &nbsp; _Three.js Portfolio_ &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="35" alt="threejs logo"  />  <img src="https://skillicons.dev/icons?i=js" height="35" alt="javascript logo"  />
 
 <!----------------------------------------- Description ---------------------------------------->
 ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Bubbles.png" alt="Bubbles" width="40" height="40" />&nbsp; _Description_
@@ -19,7 +19,7 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 <!--===================== Portfolio =============================-->
-### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" height="30"  /> &nbsp; _Three.js Portfolio_  &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="30" alt="nextjs logo"  />
+### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Laptop.webp" alt="Laptop" width="35" height="30"  /> &nbsp; _Three.js Portfolio_  &nbsp; <img src="https://skillicons.dev/icons?i=threejs" height="30" alt="three logo"  />
 
 #### 🧩 For this project, the focus is on creating an interactive experience where users can engage by moving a _Character_ within the 3D environment.
 - By combining these technologies, the project aims to showcase the capabilities of Three.js for creating immersive web experiences. <br/><br/>
@@ -30,7 +30,7 @@
 
 <br/><br/>
 
-> _Which Concepts in Have I Covered_: 
+> _Which Concepts Have I Covered_: 
 ##### _Developing classes to encapsulate different components of our code._
 ##### _Utilizing the "Zustand" state management library._
 ##### _Designing a preloader progress bar to enhance the initial user engagement impact._
